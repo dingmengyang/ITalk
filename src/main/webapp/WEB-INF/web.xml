@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<web-app>
+    <!--maven创建的servlet版本较低，修改其版本为3.1，可拷贝E:\apache-tomcat-8.5.11\webapps\examples\WEB-INF的web.xml-->
+
+    <display-name>Jersey</display-name>
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <filter>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
+    <servlet>
+        <servlet-name>ITalkApiServlet</servlet-name>
+        <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+        <init-param>
+            <param-name>jersey.config.server.provider.packages</param-name>
+            <param-value>com.imooc.web.italk.push.service</param-value>
+        </init-param>
+        <init-param>
+            <param-name>javax.ws.rs.Application</param-name>
+            <param-value>com.imooc.web.italk.push.Application</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ITalkApiServlet</servlet-name>
+        <!--默认匹配所有的请求-->
+        <url-pattern>/api/*</url-pattern>
+    </servlet-mapping>
+</web-app>
